@@ -57,6 +57,92 @@
   #chat-list-screen .chat-info {
     gap: 8px;
   }
+
+  /* ---- Chat Search Bar Mobile Fit (≤768px) ---- */
+  .search-bar,
+  .chat-search-bar {
+    position: fixed !important;
+    top: max(0px, env(safe-area-inset-top, 0px)) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    padding: 0 8px !important;
+    gap: 4px !important;
+    box-sizing: border-box !important;
+    z-index: var(--z-overlay) !important;
+  }
+  .search-bar .icon-btn,
+  .chat-search-bar .icon-btn {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    padding: 6px !important;
+  }
+  .search-bar .icon-btn.small,
+  .chat-search-bar .icon-btn.small {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    padding: 4px !important;
+  }
+  #chat-search-input {
+    min-width: 60px !important;
+    padding: 0 10px !important;
+    font-size: 16px !important;
+    height: 36px !important;
+  }
+  #search-result-counter {
+    min-width: 44px !important;
+    padding: 2px 6px !important;
+    font-size: 11.5px !important;
+  }
+}
+
+/* ---- FAB Safe Area & Fixed Positioning on Mobile/Tablet (≤1024px) ---- */
+@media (max-width: 1024px) {
+  .fab {
+    position: fixed !important;
+    right: max(16px, env(safe-area-inset-right, 16px)) !important;
+    bottom: max(24px, env(safe-area-inset-bottom, 24px)) !important;
+    width: 56px !important;
+    height: 56px !important;
+    z-index: 1000 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .fab {
+    right: max(12px, env(safe-area-inset-right, 12px)) !important;
+    bottom: max(20px, env(safe-area-inset-bottom, 20px)) !important;
+    width: 50px !important;
+    height: 50px !important;
+  }
+  .fab svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  .search-bar,
+  .chat-search-bar {
+    padding: 0 4px !important;
+    gap: 2px !important;
+  }
+  .search-bar .icon-btn,
+  .chat-search-bar .icon-btn {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    padding: 4px !important;
+  }
+  .search-bar .icon-btn.small,
+  .chat-search-bar .icon-btn.small {
+    width: 26px !important;
+    height: 26px !important;
+    min-width: 26px !important;
+    padding: 2px !important;
+  }
+  #chat-search-input {
+    padding: 0 6px !important;
+  }
 }
 
 /* ---- Small tablets & foldables (481px to 768px) ---- */

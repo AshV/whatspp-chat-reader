@@ -35,7 +35,7 @@
 
     // Apply saved theme
     var settings = Store.getSettings();
-    applyTheme(settings.theme || 'dark');
+    applyTheme(settings.theme || 'light');
 
     // Initialize Store's IndexedDB
     Store.initDB().catch(function (e) {
@@ -394,8 +394,7 @@
           // Handle existing session update
           if (existingSessionId) {
             Store.updateSessionParticipant(existingSessionId, name);
-            showScreen('chat-list');
-            ChatList.render();
+            openChat(existingSessionId);
             return;
           }
 
@@ -448,8 +447,7 @@
         card.addEventListener('click', function () {
           var name = card.getAttribute('data-name');
           Store.updateSessionParticipant(sessionId, name);
-          showScreen('chat-list');
-          ChatList.render();
+          openChat(sessionId);
         });
       })(cards[j]);
     }
@@ -515,12 +513,13 @@
         window.removeEventListener('beforeunload', triggerPurge);
         triggerPurge();
         pendingApiData = null;
-        showScreen('chat-list');
-        ChatList.render();
+        openChat(sessionId);
       }).catch(function () {
         clearTimeout(safetyTimer);
         window.removeEventListener('beforeunload', triggerPurge);
         triggerPurge();
+        pendingApiData = null;
+        openChat(sessionId);
       });
     }).catch(function (e) {
       console.error('Failed to save session:', e);
@@ -759,12 +758,15 @@
 
     Search.setVirtualScroll(currentVirtualScroll);
 
-    // Scroll to bottom initially
-    setTimeout(function () {
-      if (currentVirtualScroll) {
-        currentVirtualScroll.scrollToBottom(false);
-      }
-    }, 100);
+    // Scroll to bottom initially (`scrollToBottom(false)` is instant without smooth jump)
+    var scrollPasses = [50, 150, 350];
+    for (var sp = 0; sp < scrollPasses.length; sp++) {
+      setTimeout(function () {
+        if (currentVirtualScroll) {
+          currentVirtualScroll.scrollToBottom(false);
+        }
+      }, scrollPasses[sp]);
+    }
   }
 
   function insertDateSeparators(messages) {

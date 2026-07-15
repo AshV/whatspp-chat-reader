@@ -380,14 +380,14 @@
   function getSettings() {
     try {
       var raw = localStorage.getItem(CONFIG.SETTINGS_KEY);
-      var defaults = { theme: 'dark' };
+      var defaults = { theme: 'light' };
       if (raw) {
         var parsed = JSON.parse(raw);
         return Object.assign(defaults, parsed);
       }
       return defaults;
     } catch (e) {
-      return { theme: 'dark' };
+      return { theme: 'light' };
     }
   }
 

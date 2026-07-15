@@ -231,13 +231,14 @@
 .chat-search-bar input,
 #chat-search-input {
   flex: 1;
+  min-width: 0;
   height: 40px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   outline: none;
   background: var(--input-bg);
   color: var(--text-primary);
   font-family: var(--font-family);
-  font-size: 15px;
+  font-size: 16px; /* 16px prevents iOS Safari auto-zoom on mobile focus */
   font-weight: 500;
   border-radius: var(--radius-md);
   padding: 0 16px;
@@ -260,16 +261,25 @@
 .search-bar .search-count,
 .chat-search-bar .search-counter,
 #search-result-counter {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--header-text);
   white-space: nowrap;
-  min-width: 68px;
+  min-width: 54px;
   text-align: center;
   background: rgba(0, 0, 0, 0.2);
-  padding: 4px 10px;
+  padding: 4px 8px;
   border-radius: var(--radius-pill);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+#search-result-counter:empty {
+  display: none !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  margin: 0 !important;
 }
 
 [data-theme="light"] #search-result-counter {
@@ -643,10 +653,10 @@
 
 .fab {
   position: absolute;
-  bottom: 28px;
-  right: 28px;
-  width: 62px;
-  height: 62px;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
   border-radius: var(--radius-circle);
   border: 1px solid rgba(255, 255, 255, 0.3);
   background: var(--gradient-fab);
@@ -659,6 +669,7 @@
   z-index: var(--z-fab);
   transition: transform var(--transition-spring), box-shadow var(--transition-base), background var(--transition-base);
   animation: fabPulse 2.8s infinite ease-out;
+  box-sizing: border-box;
 }
 
 .fab:hover {

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'wa-reader-v9';
+const CACHE_NAME = 'wa-reader-v12';
 const STATIC_ASSETS = [
   './',
   './index.html',

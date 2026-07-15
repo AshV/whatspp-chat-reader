@@ -7,7 +7,7 @@
   window.WaReader = window.WaReader || {};
 
   window.WaReader.CONFIG = Object.freeze({
-    API_BASE_URL: 'https://api.ashishvishwakarma.com/wa-parser',
+    API_BASE_URL: window.WA_READER_API_URL || ((window.location.origin === 'http://localhost:8000' || window.location.origin === 'http://127.0.0.1:8000') ? '' : 'http://localhost:8000'),
     MAX_FILE_SIZE: 50 * 1024 * 1024, // 50 MB
     VIRTUAL_SCROLL_BUFFER: 20,
     VIRTUAL_SCROLL_ITEM_HEIGHT: 65,
