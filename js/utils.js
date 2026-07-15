@@ -233,6 +233,35 @@
     }
   }
 
+  /**
+   * Get display name for a session — if only 2 members, show member's name as chat name
+   */
+  function getChatDisplayName(session) {
+    if (!session) return 'WhatsApp Chat';
+    if (session.participants && session.participants.length === 2) {
+      var p0 = session.participants[0].name || session.participants[0].phone || 'Member 1';
+      var p1 = session.participants[1].name || session.participants[1].phone || 'Member 2';
+      return p0 + ' & ' + p1;
+    }
+    return session.name || session.groupName || 'WhatsApp Chat';
+  }
+
+  /**
+   * Format added on date (e.g. '16 Jul' or '16 Jul 24')
+   */
+  function formatAddedOnDate(isoString) {
+    if (!isoString) return 'Today';
+    try {
+      var d = new Date(isoString);
+      if (isNaN(d.getTime())) return 'Today';
+      var now = new Date();
+      var isSameYear = d.getFullYear() === now.getFullYear();
+      return d.toLocaleDateString([], { day: 'numeric', month: 'short', year: isSameYear ? undefined : '2-digit' });
+    } catch (e) {
+      return 'Today';
+    }
+  }
+
   // Export
   WaReader.Utils = {
     formatTime: formatTime,
@@ -248,5 +277,7 @@
     getInitials: getInitials,
     formatFileSize: formatFileSize,
     getDateKey: getDateKey,
+    getChatDisplayName: getChatDisplayName,
+    formatAddedOnDate: formatAddedOnDate,
   };
 })();

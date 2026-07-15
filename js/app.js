@@ -304,24 +304,17 @@
 
   function handleFileUpload(file) {
     showScreen('loading');
-    updateLoadingText('Uploading... 0%');
+    updateLoadingText('Processing your chat...');
 
-    var uploadProgressBar = document.getElementById('upload-progress-fill');
-    var loadingProgressBar = document.getElementById('loading-progress-fill');
     var uploadProgressWrap = document.getElementById('upload-progress-wrap');
     var loadingProgressWrap = document.getElementById('loading-progress-wrap');
 
-    if (uploadProgressWrap) uploadProgressWrap.classList.add('active');
-    if (loadingProgressWrap) loadingProgressWrap.style.display = 'block';
+    if (uploadProgressWrap) uploadProgressWrap.classList.remove('active');
+    if (loadingProgressWrap) loadingProgressWrap.style.display = 'none';
 
     ApiClient.uploadChat(file, function (percent) {
-      if (uploadProgressBar) uploadProgressBar.style.width = percent + '%';
-      if (loadingProgressBar) loadingProgressBar.style.width = percent + '%';
-      if (percent < 100) {
-        updateLoadingText('Uploading... ' + Math.round(percent) + '%');
-      } else {
-        updateLoadingText('Parsing your chat...');
-      }
+      // Only show processing animation as requested
+      updateLoadingText('Processing your chat...');
     }).then(function (response) {
       if (response.success && response.data) {
         pendingApiData = response.data;
@@ -351,6 +344,8 @@
     if (loadingProgressBar) loadingProgressBar.style.width = '0%';
     var uploadProgressWrap = document.getElementById('upload-progress-wrap');
     if (uploadProgressWrap) uploadProgressWrap.classList.remove('active');
+    var loadingProgressWrap = document.getElementById('loading-progress-wrap');
+    if (loadingProgressWrap) loadingProgressWrap.style.display = 'none';
     var uploadZone = document.getElementById('upload-zone');
     if (uploadZone) uploadZone.classList.remove('drag-over');
   }
@@ -470,8 +465,11 @@
     var lastMsg = messages.length > 0 ? messages[messages.length - 1] : null;
 
     var chatName = meta.groupName || meta.chatName || '';
-    if (!chatName && meta.chatType === 'individual' && meta.participants) {
-      // For individual chats, use the OTHER person's name
+    if (meta.participants && meta.participants.length === 2) {
+      var p0 = meta.participants[0].name || meta.participants[0].phone || 'Member 1';
+      var p1 = meta.participants[1].name || meta.participants[1].phone || 'Member 2';
+      chatName = p0 + ' & ' + p1;
+    } else if (!chatName && meta.chatType === 'individual' && meta.participants) {
       for (var i = 0; i < meta.participants.length; i++) {
         var pName = meta.participants[i].name || meta.participants[i].phone || '';
         if (pName !== selectedParticipant) {
@@ -694,14 +692,15 @@
     if (!session) return;
 
     // Update header
+    var displayName = Utils.getChatDisplayName ? Utils.getChatDisplayName(session) : session.name;
     var headerName = document.getElementById('chat-header-name');
     var headerAvatar = document.getElementById('chat-header-avatar');
 
-    if (headerName) headerName.textContent = session.name;
+    if (headerName) headerName.textContent = displayName;
     if (headerAvatar) {
-      var color = Utils.assignParticipantColor(session.name);
+      var color = Utils.assignParticipantColor(displayName);
       headerAvatar.style.backgroundColor = color;
-      headerAvatar.textContent = Utils.getInitials(session.name);
+      headerAvatar.textContent = Utils.getInitials(displayName);
     }
 
     showScreen('chat');

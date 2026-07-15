@@ -136,11 +136,18 @@
   }
 
   function renderChatItem(session) {
-    var initials = Utils.getInitials(session.name);
-    var color = Utils.assignParticipantColor(session.name);
-    var time = Utils.formatChatListDate(session.lastMessageTime);
+    var displayName = Utils.getChatDisplayName ? Utils.getChatDisplayName(session) : session.name;
+    var initials = Utils.getInitials(displayName);
+    var color = Utils.assignParticipantColor(displayName);
+    var addedOn = Utils.formatAddedOnDate ? Utils.formatAddedOnDate(session.createdAt) : 'Today';
     var lastMsg = session.lastMessage || 'No messages yet';
     if (lastMsg.length > 70) lastMsg = lastMsg.substring(0, 70) + '…';
+
+    var numParticipants = session.participants ? session.participants.length : 0;
+    var participantBadge = '<span class="chat-badge group-badge">' +
+      '<svg viewBox="0 0 24 24" width="12" height="12"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" fill="currentColor"/></svg>' +
+      ' ' + numParticipants + ' ' + (numParticipants === 1 ? 'member' : 'members') +
+      '</span>';
 
     // Message count badge
     var countBadge = '<span class="chat-badge count-badge">' +
@@ -160,21 +167,18 @@
         '<div class="chat-avatar squircle" style="background-color:' + color + '">' + Utils.sanitizeHTML(initials) + '</div>' +
         '<div class="chat-info">' +
           '<div class="chat-info-top">' +
-            '<span class="chat-name truncate">' + Utils.sanitizeHTML(session.name) + '</span>' +
-            '<span class="chat-time">' + Utils.sanitizeHTML(time) + '</span>' +
+            '<span class="chat-name truncate">' + Utils.sanitizeHTML(displayName) + '</span>' +
+            '<span class="chat-time">Added ' + Utils.sanitizeHTML(addedOn) + '</span>' +
           '</div>' +
           '<div class="chat-preview truncate">' + Utils.sanitizeHTML(lastMsg) + '</div>' +
           '<div class="chat-meta-pills">' +
+            participantBadge +
             countBadge +
             sizeBadge +
           '</div>' +
         '</div>' +
       '</div>' +
       '<div class="chat-card-actions">' +
-        '<button class="chat-action-btn open-btn" data-action="open" title="Open Conversation">' +
-          '<span>Open</span>' +
-          '<svg viewBox="0 0 24 24" width="16" height="16"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="currentColor"/></svg>' +
-        '</button>' +
         '<button class="chat-action-btn delete-btn" data-action="delete" title="Delete chat" aria-label="Delete chat">' +
           '<svg viewBox="0 0 24 24" width="18" height="18"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" fill="currentColor"/></svg>' +
         '</button>' +

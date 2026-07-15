@@ -349,6 +349,11 @@
     for (var i = 0; i < sessions.length; i++) {
       if (sessions[i].id === sessionId) {
         sessions[i].selectedParticipant = participantName;
+        if (sessions[i].participants && sessions[i].participants.length === 2) {
+          var p0 = sessions[i].participants[0].name || sessions[i].participants[0].phone || 'Member 1';
+          var p1 = sessions[i].participants[1].name || sessions[i].participants[1].phone || 'Member 2';
+          sessions[i].name = p0 + ' & ' + p1;
+        }
         break;
       }
     }
