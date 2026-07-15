@@ -1,0 +1,300 @@
+/* ============================================
+   WhatsApp Chat Reader — Responsive & Futuristic OS Layout
+   Ultra-responsive mobile, tablet, desktop console & widescreen
+   ============================================ */
+
+/* ---- Base (mobile-first, ≤480px) ---- */
+.message-row {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 2px;
+}
+
+.system-message,
+.date-separator {
+  padding-left: 12px;
+  padding-right: 12px;
+  margin: 10px auto;
+}
+
+.message-bubble {
+  max-width: 86%;
+  padding: 8px 10px 10px 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.participant-grid {
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.upload-card {
+  padding: 26px 18px;
+}
+
+.upload-zone {
+  padding: 36px 18px;
+}
+
+/* ---- Small tablets & foldables (481px to 768px) ---- */
+@media (min-width: 481px) {
+  .message-row {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .system-message,
+  .date-separator {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .message-bubble {
+    max-width: 76%;
+    padding: 9px 12px 11px 14px;
+  }
+
+  .participant-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+
+  .upload-card {
+    padding: 34px 26px;
+  }
+}
+
+/* ---- Large Tablets & iPad (769px to 1024px) ---- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  body {
+    background: var(--bg-primary);
+  }
+
+  #app-container {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    width: 100%;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .chat-list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 20px;
+    background: transparent;
+  }
+
+  .message-row {
+    padding-left: max(24px, calc(50% - 380px));
+    padding-right: max(24px, calc(50% - 380px));
+  }
+
+  .system-message,
+  .date-separator {
+    padding-left: max(24px, calc(50% - 380px));
+    padding-right: max(24px, calc(50% - 380px));
+  }
+
+  .message-bubble {
+    max-width: 70%;
+  }
+}
+
+/* ---- Desktop & Widescreen Futuristic Workspace Console (1025px+) ---- */
+@media (min-width: 1025px) {
+  body {
+    background-color: var(--bg-primary);
+    overflow: hidden;
+  }
+
+  /* Widescreen Quantum Grid Wallpaper background behind workspace */
+  .desktop-bg {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    background-image: url('../assets/futuristic_wa_wallpaper.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.18;
+    filter: blur(2px) saturate(130%);
+  }
+
+  .desktop-bg-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 140px;
+    background: linear-gradient(180deg, var(--accent-darker) 0%, rgba(0, 128, 105, 0.2) 100%);
+    opacity: 0.85;
+    filter: blur(2px);
+  }
+
+  [data-theme="light"] .desktop-bg-top {
+    background: linear-gradient(180deg, var(--accent) 0%, rgba(0, 168, 132, 0.15) 100%);
+  }
+
+  .desktop-bg-bottom {
+    position: absolute;
+    top: 140px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--bg-secondary);
+    opacity: 0.25;
+  }
+
+  /* Universal Edge-to-Edge Workspace Container */
+  #app-container {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    width: 100%;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+  }
+
+  /* Dashboard Cards Container (replaces blocky tiles) */
+  .chat-list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 32px 28px;
+    background: transparent;
+  }
+
+  /* Centered Conversation Column inside Full-Screen View */
+  .message-row {
+    padding-left: max(32px, calc(50% - 460px));
+    padding-right: max(32px, calc(50% - 460px));
+  }
+
+  .system-message,
+  .date-separator {
+    padding-left: max(32px, calc(50% - 460px));
+    padding-right: max(32px, calc(50% - 460px));
+  }
+
+  .message-bubble {
+    max-width: 65%;
+  }
+
+  /* Expanded Upload Card on Widescreen — perfectly centered and filling the space */
+  .upload-body,
+  .upload-screen-body {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 40px;
+  }
+
+  .upload-card {
+    width: 100%;
+    max-width: 860px;
+    padding: 52px 48px;
+    margin: auto;
+  }
+}
+
+/* ---- Landscape phone ---- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .upload-card {
+    padding: 16px;
+  }
+
+  .upload-zone {
+    padding: 20px 16px;
+  }
+
+  .upload-icon-wrap {
+    margin-bottom: 10px;
+  }
+
+  .upload-icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .empty-state {
+    padding: 20px;
+  }
+
+  .empty-state-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .participant-screen-body {
+    padding: 16px;
+  }
+
+  .participant-title {
+    font-size: var(--font-size-header);
+    margin-bottom: 4px;
+  }
+
+  .participant-subtitle {
+    margin-bottom: 12px;
+  }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .screen.slide-in-right,
+  .screen.slide-out-left,
+  .screen.slide-in-left,
+  .screen.slide-out-right {
+    animation: none;
+  }
+}
+
+/* ---- Print ---- */
+@media print {
+  .app-header,
+  .chat-header,
+  .chat-footer,
+  .fab,
+  .scroll-bottom-btn,
+  .settings-menu {
+    display: none !important;
+  }
+
+  .message-row {
+    padding: 2px 8px;
+  }
+
+  .message-bubble {
+    max-width: 100%;
+    box-shadow: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}

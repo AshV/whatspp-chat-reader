@@ -1,0 +1,148 @@
+/* ============================================
+   WhatsApp Chat Reader — Design Tokens
+   Dual-theme CSS custom properties (Futuristic Neo-WhatsApp)
+   ============================================ */
+
+:root {
+  /* ---- Dark Quantum Theme (default) ---- */
+  --bg-primary: #0A1116;
+  --bg-secondary: #121D25;
+  --bg-chat: #060B0F;
+  --bubble-outgoing: #006D5B;
+  --bubble-incoming: #16242E;
+  --bubble-outgoing-darker: #005648;
+  --text-primary: #F0F4F8;
+  --text-secondary: #8E9EAB;
+  --text-bubble-sent: #FFFFFF;
+  --text-bubble-received: #F0F4F8;
+  --accent: #00E5AA;
+  --accent-darker: #00B083;
+  --accent-hover: #1AFFC2;
+  --gradient-accent: linear-gradient(135deg, #00E5AA 0%, #00876C 100%);
+  --gradient-fab: linear-gradient(135deg, #00FFBE 0%, #008069 100%);
+  --border: rgba(255, 255, 255, 0.08);
+  --system-bubble: rgba(18, 29, 37, 0.88);
+  --system-text: #8E9EAB;
+  --header-bg: rgba(15, 25, 33, 0.86);
+  --header-text: #F0F4F8;
+  --input-bg: rgba(255, 255, 255, 0.06);
+  --hover: rgba(255, 255, 255, 0.05);
+  --hover-strong: rgba(0, 229, 170, 0.12);
+  --danger: #FF5252;
+  --danger-hover: #E03E3E;
+  --link: #38C6FF;
+  --tick: #8E9EAB;
+  --tick-read: #38C6FF;
+  --chat-wallpaper-overlay: rgba(6, 11, 15, 0.94);
+  
+  /* Shadows & Holographic Depth */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55);
+  --shadow-fab: 0 8px 26px rgba(0, 229, 170, 0.45), 0 0 15px rgba(0, 229, 170, 0.3);
+  --shadow-ambient: 0 0 60px rgba(0, 229, 170, 0.14), 0 30px 80px rgba(0, 0, 0, 0.65);
+  --shadow-dropdown: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  --upload-glass-bg: rgba(18, 29, 37, 0.82);
+  --upload-glass-border: rgba(0, 229, 170, 0.22);
+  --modal-backdrop: rgba(6, 11, 15, 0.78);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.18);
+  --scrollbar-thumb-hover: rgba(0, 229, 170, 0.4);
+  --mark-bg: rgba(0, 229, 170, 0.35);
+  --mark-active-bg: rgba(0, 229, 170, 0.7);
+  --context-menu-bg: #15222C;
+
+  /* ---- Typography ---- */
+  --font-family: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-size-tiny: 11px;
+  --font-size-small: 12px;
+  --font-size-time: 11.5px;
+  --font-size-secondary: 13.2px;
+  --font-size-body: 14.5px;
+  --font-size-header: 16.5px;
+  --font-size-title: 18px;
+  --font-size-sender: 13px;
+  --font-size-system: 12.5px;
+  --line-height-message: 20px;
+
+  /* ---- Border Radius ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --radius-pill: 24px;
+  --radius-circle: 50%;
+  --radius-bubble: 12px;
+  --radius-input: 24px;
+
+  /* ---- Transitions ---- */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---- Z-Index scale ---- */
+  --z-wallpaper: 0;
+  --z-messages: 1;
+  --z-fab: 10;
+  --z-header: 20;
+  --z-search-bar: 25;
+  --z-dropdown: 30;
+  --z-scroll-btn: 15;
+  --z-overlay: 100;
+  --z-media-viewer: 1000;
+  --z-toast: 1100;
+
+  /* ---- Spacing ---- */
+  --message-padding-h: 63px;
+  --header-height: 62px;
+  --footer-height: 62px;
+}
+
+/* ============================================
+   Prism Ethereal Light Theme
+   ============================================ */
+[data-theme="light"] {
+  --bg-primary: #F4F7FA;
+  --bg-secondary: #E8EEF3;
+  --bg-chat: #DFE6EC;
+  --bubble-outgoing: #D0F8E6;
+  --bubble-incoming: #FFFFFF;
+  --bubble-outgoing-darker: #BAF2DA;
+  --text-primary: #0F171D;
+  --text-secondary: #586875;
+  --text-bubble-sent: #0F171D;
+  --text-bubble-received: #0F171D;
+  --accent: #00876C;
+  --accent-darker: #006D5B;
+  --accent-hover: #00A282;
+  --gradient-accent: linear-gradient(135deg, #00A884 0%, #006D5B 100%);
+  --gradient-fab: linear-gradient(135deg, #00C29A 0%, #007A64 100%);
+  --border: rgba(0, 0, 0, 0.08);
+  --system-bubble: rgba(255, 255, 255, 0.92);
+  --system-text: #586875;
+  --header-bg: rgba(0, 135, 108, 0.92);
+  --header-text: #FFFFFF;
+  --input-bg: #FFFFFF;
+  --hover: rgba(0, 0, 0, 0.04);
+  --hover-strong: rgba(0, 135, 108, 0.12);
+  --danger: #E03E3E;
+  --danger-hover: #C92A2A;
+  --link: #0080BA;
+  --tick: #708090;
+  --tick-read: #0080BA;
+  --chat-wallpaper-overlay: rgba(223, 230, 236, 0.94);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.14);
+  --shadow-fab: 0 8px 24px rgba(0, 135, 108, 0.35);
+  --shadow-ambient: 0 0 60px rgba(0, 135, 108, 0.12), 0 30px 80px rgba(0, 0, 0, 0.2);
+  --shadow-dropdown: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --upload-glass-bg: rgba(255, 255, 255, 0.88);
+  --upload-glass-border: rgba(0, 135, 108, 0.18);
+  --modal-backdrop: rgba(15, 23, 29, 0.55);
+  --scrollbar-thumb: rgba(0, 0, 0, 0.16);
+  --scrollbar-thumb-hover: rgba(0, 135, 108, 0.38);
+  --mark-bg: rgba(0, 135, 108, 0.25);
+  --mark-active-bg: rgba(0, 135, 108, 0.5);
+  --context-menu-bg: #FFFFFF;
+}

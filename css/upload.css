@@ -1,0 +1,414 @@
+/* ============================================
+   WhatsApp Chat Reader — Upload Screen
+   Glassmorphism card + drag-drop zone
+   ============================================ */
+
+.upload-body,
+.upload-screen-body {
+  flex: 1;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100%;
+  min-height: calc(100dvh - var(--header-height));
+  padding: 36px 24px;
+  overflow-y: auto;
+}
+
+.upload-card {
+  width: 100%;
+  max-width: 780px;
+  margin: auto;
+  background: var(--upload-glass-bg);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid var(--upload-glass-border);
+  border-radius: var(--radius-xl);
+  padding: 44px 40px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(0, 229, 170, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn var(--transition-slow);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Holographic Cyber-Emerald Accent Glow */
+.upload-card::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: radial-gradient(circle at 50% 0%, var(--accent), transparent 60%);
+  opacity: 0.12;
+  pointer-events: none;
+  animation: quantumRotate 15s infinite linear;
+}
+
+@keyframes quantumRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.upload-card-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 8px;
+  position: relative;
+  letter-spacing: -0.5px;
+}
+
+.upload-card-subtitle {
+  font-size: var(--font-size-secondary);
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.5;
+  position: relative;
+}
+
+/* Upload icon with quantum float animation */
+.upload-icon-wrap {
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.upload-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 82px;
+  height: 82px;
+  border-radius: var(--radius-circle);
+  background: var(--gradient-accent);
+  box-shadow: 0 12px 30px rgba(0, 229, 170, 0.45), inset 0 2px 3px rgba(255,255,255,0.3);
+  animation: uploadFloat 3.5s ease-in-out infinite;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.upload-icon svg {
+  width: 40px;
+  height: 40px;
+  fill: #0A1116;
+  filter: drop-shadow(0 2px 4px rgba(255,255,255,0.4));
+}
+
+@keyframes uploadFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 12px 30px rgba(0, 229, 170, 0.45);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.06);
+    box-shadow: 0 20px 40px rgba(0, 229, 170, 0.65);
+  }
+}
+
+/* Drag-drop zone - Holographic Scan Grid */
+.upload-zone {
+  border: 2px dashed rgba(0, 229, 170, 0.4);
+  border-radius: var(--radius-lg);
+  padding: 46px 26px;
+  text-align: center;
+  transition: all var(--transition-spring);
+  cursor: pointer;
+  position: relative;
+  background: radial-gradient(circle at center, rgba(0, 229, 170, 0.04) 0%, transparent 75%);
+}
+
+.upload-zone:hover {
+  border-color: var(--accent);
+  background-color: rgba(0, 229, 170, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 229, 170, 0.15), inset 0 0 25px rgba(0, 229, 170, 0.08);
+}
+
+.upload-zone.drag-over {
+  border-color: var(--accent);
+  background-color: rgba(0, 229, 170, 0.14);
+  border-style: solid;
+  transform: scale(1.03);
+  box-shadow: 0 15px 40px rgba(0, 229, 170, 0.25), inset 0 0 35px rgba(0, 229, 170, 0.15);
+}
+
+.upload-zone.drag-over .upload-zone-text {
+  color: var(--accent);
+}
+
+/* Animated dashed border on drag-over */
+@keyframes dashMove {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.upload-zone-icon {
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+}
+
+.upload-zone-icon svg {
+  width: 40px;
+  height: 40px;
+  fill: currentColor;
+}
+
+.upload-zone.drag-over .upload-zone-icon {
+  color: var(--accent);
+}
+
+.upload-zone-text {
+  font-size: var(--font-size-body);
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  transition: color var(--transition-base);
+}
+
+.upload-zone-text strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.upload-zone-hint {
+  font-size: var(--font-size-small);
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* Hidden file input */
+.upload-file-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Format guidance */
+.upload-format-guide {
+  margin-top: 20px;
+  padding: 12px 16px;
+  background-color: var(--hover);
+  border-radius: var(--radius-md);
+  position: relative;
+}
+
+.upload-format-title {
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.upload-format-title svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--accent);
+}
+
+.upload-format-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.upload-format-list li {
+  font-size: var(--font-size-small);
+  color: var(--text-secondary);
+  padding: 2px 0;
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.upload-format-list li::before {
+  content: '•';
+  position: absolute;
+  left: 4px;
+  color: var(--accent);
+}
+
+/* Upload progress */
+.upload-progress-wrap {
+  margin-top: 20px;
+  display: none;
+  position: relative;
+}
+
+.upload-progress-wrap.active {
+  display: block;
+}
+
+.upload-progress-track {
+  width: 100%;
+  height: 4px;
+  background-color: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.upload-progress-bar {
+  height: 100%;
+  background-color: var(--accent);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.upload-progress-text {
+  font-size: var(--font-size-small);
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* File selected state */
+.upload-file-info {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 10px 14px;
+  background-color: var(--hover);
+  border-radius: var(--radius-md);
+  position: relative;
+}
+
+.upload-file-info.active {
+  display: flex;
+}
+
+.upload-file-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background-color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.upload-file-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+}
+
+.upload-file-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.upload-file-name {
+  font-size: var(--font-size-secondary);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upload-file-size {
+  font-size: var(--font-size-tiny);
+  color: var(--text-secondary);
+}
+
+.upload-file-remove {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-circle);
+  color: var(--text-secondary);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.upload-file-remove:hover {
+  background-color: var(--hover-strong);
+  color: var(--danger);
+}
+
+.upload-file-remove svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Upload button */
+.upload-submit-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  display: none;
+}
+
+.upload-submit-btn.active {
+  display: flex;
+}
+
+/* Upload Instructions Guide */
+.upload-info {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  text-align: left;
+  margin-top: 8px;
+  transition: border-color var(--transition-base);
+}
+
+.upload-info:hover {
+  border-color: rgba(0, 229, 170, 0.35);
+}
+
+.upload-info h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upload-info h3::before {
+  content: '💡';
+  font-size: 18px;
+}
+
+.upload-info ol {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text-secondary);
+  font-size: 14.2px;
+  line-height: 1.8;
+}
+
+.upload-info ol li {
+  margin-bottom: 6px;
+}
+
+.upload-info ol li strong {
+  color: #00E5AA;
+  font-weight: 600;
+  background: rgba(0, 229, 170, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
